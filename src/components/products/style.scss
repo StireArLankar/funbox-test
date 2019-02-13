@@ -1,0 +1,29 @@
+.products__wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.products__title {
+  color: white;
+  margin: 0 auto;
+  font-size: 36px;
+  text-align: center;
+  font-family: 'Exo2.0', Arial, sans-serif;
+  font-weight: 100;
+}
+
+.products__list {
+  padding: 0;
+  margin: 0;
+  margin-top: 30px;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.products__item {
+  display: flex;
+}
