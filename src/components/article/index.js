@@ -30,17 +30,18 @@ class Article extends Component {
   };
 
   renderList = list => {
-    return list.map((item, index) => (
-      <li key={index} className="article__list-item">
-        {item}
-      </li>
-    ));
+    return list.map((item, index) => {
+      const it = item.split(' ').map((substr, index) => {
+        return isNaN(+substr) ? substr + ' ' : <span className='bold' key={index}>{substr} </span>
+      });
+      return <li key={index} className="article__list-item">{it}</li>
+    });
   };
 
   renderTagline = () => {
     const { hover } = this.state;
     const { selected } = this.props.data;
-    const text = selected && hover ? 'Котэ не одобряет?' : 'Сказочное заморское царство';
+    const text = selected && hover ? 'Котэ не одобряет?' : 'Сказочное заморское яство';
     return <p className='article__tagline'>{text}</p>
   }
 

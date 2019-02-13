@@ -3,114 +3,47 @@ $default-hover-color: #2ea8e6;
 $selected-color: #d91667;
 $selected-hover-color: #e62e7a;
 $disabled-color: #b3b3b3;
-$color: $default-color;
+$border-radius: 15px;
+$border-width: 5px;
+$corner-size: 40px;
 
 .article__wrapper {
   width: 320px;
-  // --default-color: #1698d9;
-  // --default-hover-color: #2ea8e6;
-  // --selected-color: #d91667;
-  // --selected-hover-color: #e62e7a;
-  // --disabled-color: #b3b3b3;
-  // --color: var(--default-color)
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+  color: $default-color;
 
-.article__wrapper--hover {
-  $color: $default-hover-color;
-
-  .article__content::before {
-    border-color: $color;
+  &--hover {
+    color: $default-hover-color;
   }
 
-  .article__background {
-    border-color: $color;
+  &--selected {
+    color: $selected-color;
   }
 
-  .article__background::before {
-    border-color: $color;
+  &--selected#{&}--hover {
+    color: $selected-hover-color;
+
+    .article__tagline {
+      color: $selected-hover-color;
+    }
   }
 
-  .article__amount {
-    background-color: $color;
-  }
-}
+  &--disabled {
+    color: $disabled-color;
 
-.article__wrapper--selected {
-  $color: $selected-color;
-
-  .article__content::before {
-    border-color: $color;
-  }
-
-  .article__background {
-    border-color: $color;
-  }
-
-  .article__background::before {
-    border-color: $color;
-  }
-
-  .article__amount {
-    background-color: $color;
-  }
-}
-
-.article__wrapper--selected.article__wrapper--hover {
-  $color: $selected-hover-color;
-
-  .article__content::before {
-    border-color: $color;
-  }
-
-  .article__background {
-    border-color: $color;
-  }
-
-  .article__background::before {
-    border-color: $color;
-  }
-
-  .article__amount {
-    background-color: $color;
-  }
-
-  .article__tagline {
-    color: $color;
-  }
-}
-
-.article__wrapper--disabled {
-  $color: $disabled-color;
-
-  .article__content::before {
-    border-color: $color;
-  }
-
-  .article__background {
-    border-color: $color;
-  }
-
-  .article__background::before {
-    border-color: $color;
-  }
-
-  .article__amount {
-    background-color: $color;
-  }
-
-  .article__description {
-    opacity: 0.5;
-  }
-
-  .article__img {
-    opacity: 0.5;
-  }
-
-  .article__afterline {
-    color: #ffff66;
+    .article__description {
+      opacity: 0.5;
+    }
+  
+    .article__img {
+      opacity: 0.5;
+    }
+  
+    .article__afterline {
+      color: #ffff66;
+    }
   }
 }
 
@@ -121,31 +54,35 @@ $color: $default-color;
   display: flex;
 
   &::before {
-    $sqrt: 1.41421356237px;
+    $sqrt2: 1.41421356237;
+    width: $corner-size * $sqrt2;
+    height: $corner-size * $sqrt2;
+
+    top: 0;
+    left: 0;
+
     content: '';
+    box-sizing: border-box;
     z-index: 2;
     position: absolute;
-    top: -19.5px;
-    left: -20.5px;
-    width: 49.42641px;
-    height: 42.42641px;
-    transform: rotate(-45deg);
-    border-color: $color;
+    transform: translate(-61%, -2.5%) rotate(-45deg); //подгон
+    transform-origin: $border-width $border-width;
+    border-color: currentColor;
     border-style: solid;
     border-width: 0;
-    border-bottom-width: 5px;
+    border-bottom-width: $border-width;
     pointer-events: none;
   }
 }
 
 .article__background {
-  border-width: 5px 5px 5px 0;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-color: $color;
+  border-width: $border-width $border-width $border-width 0;
+  border-top-right-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  border-color: currentColor;
   border-style: solid;
   background-color: white;
-  margin-left: 35px;
+  margin-left: $corner-size;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -155,15 +92,15 @@ $color: $default-color;
   &::before {
     content: '';
     position: absolute;
-    width: 31px;
-    height: calc(100% - 30px);
+    width: $corner-size + 1px - $border-width;
+    height: calc(100% - #{$corner-size} + #{$border-width});
     background-color: white;
-    border-width: 0 0 5px 5px;
-    border-color: $color;
+    border-width: 0 0 $border-width $border-width;
+    border-color: currentColor;
     border-style: solid;
-    bottom: -5px;
-    left: -35px;
-    border-bottom-left-radius: 20px;
+    bottom: -$border-width;
+    left: -$corner-size;
+    border-bottom-left-radius: $border-radius;
   }
 
   &::after {
@@ -173,17 +110,18 @@ $color: $default-color;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 0 35px 35px;
+    border-width: 0 0 $corner-size $corner-size;
     border-color: transparent transparent white transparent;
     top: 0;
-    left: -35px;
+    left: -$corner-size + 1px;
     pointer-events: none;
   }
 }
 
 .article__description {
-  padding: 20px 45px 20px 0;
+  padding: 20px 45px 20px 5px;
   flex-grow: 1;
+  color: black;
 }
 
 .article__tagline {
@@ -213,16 +151,16 @@ $color: $default-color;
 
 .article__list-item {
   font-size: 14px;
-  font-weight: 100;
-  font-family: 'Exo2.0', Arial, sans-serif;
+  line-height: 16px;
+  font-weight: 400;
 }
 
 .article__img-wrapper {
   width: 255px;
   height: 269px;
   position: relative;
-  left: -30px;
-  border-bottom-left-radius: 14px;
+  left: - $corner-size + $border-width;
+  border-bottom-left-radius: $border-radius * 14 / 20;
   overflow: hidden;
 }
 
@@ -235,27 +173,30 @@ $color: $default-color;
 }
 
 .article__amount {
-  position: absolute;
+  $size: 81px;
   width: 81px;
   height: 81px;
+
+  position: absolute;
   border-radius: 50%;
-  background-color: $color;
+  background-color: currentColor;
   bottom: 16px;
   right: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
 }
 
 .article__amount-count {
   font-size: 42px;
+  color: white;
 }
 
 .article__amount-unit {
   font-size: 21px;
   line-height: 21px;
+  color: white;
 }
 
 .article__afterline {
@@ -266,9 +207,9 @@ $color: $default-color;
 
 .article__afterline-link {
   cursor: pointer;
-  color: #1698d9;
+  color: $default-color;
   font-weight: bold;
   text-decoration-line: underline;
-  text-decoration-color: #1698d9;
+  text-decoration-color: $default-color;
   text-decoration-style: dashed;
 }

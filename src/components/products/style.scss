@@ -12,12 +12,13 @@
   text-align: center;
   font-family: 'Exo2.0', Arial, sans-serif;
   font-weight: 100;
+  margin-top: 15px;
 }
 
 .products__list {
   padding: 0;
   margin: 0;
-  margin-top: 30px;
+  margin-top: 20px;
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
@@ -26,4 +27,5 @@
 
 .products__item {
   display: flex;
+  margin: 10px 40px 10px;
 }
