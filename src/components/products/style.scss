@@ -1,7 +1,9 @@
 .products__wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   max-width: 1200px;
+  min-height: 90vh;
   margin: 0 auto;
 }
 
